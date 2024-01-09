@@ -36,7 +36,7 @@ snake.push({
 snake.push({
     x : 1,
     y : 1,
-    xNext:0,
+    xNext:2,
     yNext:1,
     pinta: function(){
         ctx.font = '25px Serif';
@@ -47,7 +47,7 @@ snake.push({
 snake.push({
     x : 0,
     y : 1,
-    xNext:0,
+    xNext:1,
     yNext:1,
     pinta: function(){
         ctx.font = '25px Serif';
@@ -67,12 +67,42 @@ const comida = {
         ctx.fillText('🦴', this.x * 20, this.y * 20);
     }
 }
+
+let direccion = 1; // derecha
+
+//evento del teclado
+document.querySelector('body').addEventListener('keydown', function(e){
+    switch(e.key){
+        case "ArrowUp":
+            direccion = 4;
+            break;
+        case 'ArrowRight':
+            direccion = 1;
+            break;
+        case 'ArrowLeft':
+            direccion = 3;
+            break;
+        case 'ArrowDown':
+            direccion = 2
+            break;
+    }
+})
+
+
  setInterval(() => {
     ctx.fillRect(0,0, 600, 400);
-    nextMove();
-    posX++;
     // comida.aparece();
     // comida.pinta();
     snake.forEach(bolita => bolita.pinta())
- },500);
+    if(direccion === 1) posX++;
+    else if(direccion === 2 ) posY ++; // izquierda
+    else if (direccion === 3) posX --; //arriba
+    else posY --; //abajo
+
+    if(posX >= 30) posX = 0;
+    else if(posX <= 0) posX = 29;
+    if(posY >= 20) posY = 0;
+    else if(posY <= 0) posY = 20;
+    nextMove();
+},200);
 snake.pinta();
