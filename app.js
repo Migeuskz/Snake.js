@@ -8,6 +8,7 @@ const ctx = lienzo.getContext('2d');
 
 let posX = 2;
 let posY = 1;
+let direccion = 1; // derecha
 function start(){
     const snake = [];
     snake.push({
@@ -83,8 +84,8 @@ const comida = {
     x:0,
     y:0,
     aparece: function(){
-        this.x= Math.floor(Math.random() * 30) ;
-        this.y= Math.floor(Math.random() * 20);
+        this.x= Math.floor(Math.random() * 25) ;
+        this.y= Math.floor(Math.random() * 15);
     },
     pinta:function(){
         ctx.font = '25px Serif';
@@ -110,7 +111,17 @@ document.querySelector('body').addEventListener('keydown', function(e){
     }
 })
 
-let direccion = 1; // derecha
+document.querySelector('.container').addEventListener('click', (e) => {
+    if(e.target.classList.contains('btn')){
+        const bText = e.target.innerText;
+        if(bText === 'Up') direccion = 4;
+        else if(bText === 'Right') direccion =1;
+        else if(bText === 'Down') direccion =2;
+        else direccion = 3;
+    }
+})
+
+
 comida.aparece();
 
  setInterval(() => {
@@ -130,9 +141,9 @@ comida.aparece();
     else if (direccion === 3) posX --; //arriba
     else posY --; //abajo
 
-    if(posX > 29) posX = 0;
-    else if(posX < 0) posX = 29;
+    if(posX > 24) posX = 0;
+    else if(posX < 0) posX = 24;
     if(posY > 20) posY = 0;
-    else if(posY < 1) posY = 20;
+    else if(posY < 1) posY = 15;
     nextMove();
 },200);

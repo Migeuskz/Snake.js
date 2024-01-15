@@ -14,3 +14,29 @@ body{
 h1{
     text-align: center;
 }
+
+.container{
+    display: flex;
+    flex-direction: row;
+}
+
+.btn{
+    width: 7rem;
+    height: 7rem;
+    border-radius: 50%;
+    border: 5px solid violet;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    margin: 3rem;
+}
+
+.btn:active{
+    background-color: blueviolet;
+}
+
+.left, .right{
+    height: 60rem;
+    display: flex;
+    flex-direction: column;
+}
