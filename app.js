@@ -9,7 +9,16 @@ const ctx = lienzo.getContext('2d');
 let posX = 2;
 let posY = 1;
 let direccion = 1; // derecha
+
+const eating = new Audio('./music/bite.mp3');
+const death = new Audio('./music/gameOver.mp3');
+const startGame = new Audio('./music/gameStart.mp3');
+
 function start(){
+    posX = 2;
+    posY = 1;
+    direccion = 1;
+
     const snake = [];
     snake.push({
         x:2,
@@ -64,6 +73,7 @@ function nextMove(){
 
 function checkEat(){
     if(snake[0].x === comida.x && snake[0].y === comida.y){
+        eating.play();
         snake.push({...snake[1] });
         comida.aparece();
     }
@@ -85,7 +95,7 @@ const comida = {
     y:0,
     aparece: function(){
         this.x= Math.floor(Math.random() * 25) ;
-        this.y= Math.floor(Math.random() * 15);
+        this.y= Math.ceil(Math.random() * 15);
     },
     pinta:function(){
         ctx.font = '25px Serif';
@@ -131,6 +141,7 @@ comida.aparece();
 
     checkEat();
     if(gameOver()){
+        death.play();
         alert('hijole mano');
         snake = start();
     }

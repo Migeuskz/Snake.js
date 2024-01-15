@@ -36,7 +36,7 @@ h1{
 }
 
 .left, .right{
-    height: 60rem;
+    height: 500px;
     display: flex;
     flex-direction: column;
 }
